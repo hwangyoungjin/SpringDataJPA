@@ -18,4 +18,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     //dto로 조회하기
     @Query("select new study.datajpa.dto.MemberDto(m.id, m.username, t.name) from Member m join m.team t")
     List<MemberDto> findMemberDto();
+
+    @Query("select m from Member m where m.username in :names")
+    List<Member> findMemberList(@Param("names") List<String> names);
 }
